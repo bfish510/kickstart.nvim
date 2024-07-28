@@ -591,6 +591,21 @@ require('lazy').setup({
                         },
                     },
                 },
+                taplo = {
+                    keys = {
+                        {
+                            'K',
+                            function()
+                                if vim.fn.expand '%:t' == 'Cargo.toml' and require('crates').popup_available() then
+                                    require('crates').show_popup()
+                                else
+                                    vim.lsp.buf.hover()
+                                end
+                            end,
+                            desc = 'Show Crate Documentation',
+                        },
+                    },
+                },
             }
 
             -- Ensure the servers and tools above are installed
@@ -697,8 +712,24 @@ require('lazy').setup({
             --  into multiple repos for maintenance purposes.
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-path',
+            {
+                'Saecki/crates.nvim',
+                event = { 'BufRead Cargo.toml' },
+                opts = {
+                    completion = {
+                        cmp = { enabled = true },
+                    },
+                },
+            },
         },
-        config = function()
+        opts = {
+            setup = {
+                rust_analyzer = function()
+                    return true
+                end,
+            },
+        },
+        config = function(_, opts)
             -- See `:help cmp`
             local cmp = require 'cmp'
             local luasnip = require 'luasnip'
@@ -773,6 +804,7 @@ require('lazy').setup({
                     { name = 'nvim_lsp' },
                     { name = 'luasnip' },
                     { name = 'path' },
+                    { name = 'crates' },
                 },
             }
         end,
@@ -861,7 +893,7 @@ require('lazy').setup({
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         opts = {
-            ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+            ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'rust' },
             -- Autoinstall languages that are not installed
             auto_install = true,
             highlight = {
