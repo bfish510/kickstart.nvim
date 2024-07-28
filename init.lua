@@ -817,6 +817,27 @@ require('lazy').setup({
             -- - sr)'  - [S]urround [R]eplace [)] [']
             require('mini.surround').setup()
 
+            require('mini.sessions').setup()
+
+            local starter = require 'mini.starter'
+
+            starter.setup {
+                items = {
+                    starter.sections.builtin_actions(),
+                    starter.sections.recent_files(10, false),
+                    starter.sections.recent_files(10, true),
+                    -- Use this if you set up 'mini.sessions'
+                    starter.sections.sessions(5, true),
+                    starter.sections.telescope(),
+                },
+                content_hooks = {
+                    starter.gen_hook.adding_bullet(),
+                    starter.gen_hook.indexing('all', { 'Builtin actions' }),
+                    starter.gen_hook.aligning('center', 'center'),
+                    starter.gen_hook.padding(3, 2),
+                },
+            }
+
             -- Simple and easy statusline.
             --  You could remove this setup call if you don't like it,
             --  and try some other statusline plugin
@@ -854,10 +875,27 @@ require('lazy').setup({
             incremental_selection = {
                 enable = true,
                 keymaps = {
-                    init_selection = 'gnn',
-                    node_incremental = 'grn',
-                    scope_incremental = 'grc',
-                    node_decremental = 'grm',
+                    init_selection = '<C-space>',
+                    node_incremental = '<C-space>',
+                    scope_incremental = false,
+                    node_decremental = '<bs>',
+                },
+            },
+            textobjects = {
+                select = {
+                    enable = true,
+                    lookahead = true,
+                    keymaps = {
+                        ['aa'] = '@parameter.outer',
+                        ['ia'] = '@parameter.inner',
+                        ['af'] = '@function.outer',
+                        ['if'] = '@function.inner',
+                        ['ac'] = '@class.outer',
+                        ['ic'] = '@class.inner',
+                    },
+                },
+                move = {
+                    enable = true,
                 },
             },
         },
@@ -923,4 +961,4 @@ require('lazy').setup({
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+-- vim: ts=4 sts=4 sw=4 et
