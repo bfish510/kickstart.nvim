@@ -6,7 +6,7 @@ return {
         config = function()
             local lint = require 'lint'
             lint.linters_by_ft = {
-                markdown = { 'markdownlint-cli2', 'vale_ls' },
+                markdown = { 'markdownlint-cli2', 'vale' },
                 ruby = { 'ruby' },
                 text = { 'vale' },
             }
