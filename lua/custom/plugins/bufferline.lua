@@ -14,9 +14,12 @@ return {
             offsets = {
                 {
                     filetype = 'neo-tree',
-                    text = 'Neo-tree',
+                    text = function()
+                        return vim.fn.getcwd()
+                    end,
                     highlight = 'Directory',
                     text_align = 'left',
+                    padding = 1,
                 },
             },
         },
