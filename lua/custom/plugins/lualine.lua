@@ -1,6 +1,6 @@
 return {
     'nvim-lualine/lualine.nvim',
-    event = 'VeryLazy',
+    event = { 'VeryLazy', 'ColorScheme' },
     init = function()
         vim.g.lualine_laststatus = vim.o.laststatus
         if vim.fn.argc(-1) > 0 then
@@ -10,7 +10,7 @@ return {
         end
     end,
     opts = {
-        theme = 'dracula',
+        theme = 'rose-pine',
         icons_enabled = true,
         disabled_filetypes = {
             statusline = { 'neo-tree', 'toggleterm' },

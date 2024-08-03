@@ -12,3 +12,5 @@ vim.opt.smartindent = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.iskeyword:append { '-' }
+
+vim.opt.termguicolors = true

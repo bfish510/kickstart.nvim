@@ -1,7 +1,11 @@
+local rose_pine_overrides = { buffer_selected = { italic = false } } -- { buffer_selected = { bg = '#FFFFFF', fg = '#000000', bold = false, italic = false } }
+
 return {
     'akinsho/bufferline.nvim',
     version = '*',
-    dependencies = 'nvim-tree/nvim-web-devicons',
+    dependencies = {
+        'nvim-tree/nvim-web-devicons',
+    },
     keys = {
         { '<leader>bo', '<Cmd>BufferLineCloseOthers<CR>', desc = 'Delete [B]uffers: [O]ther' },
         { '<S-h>', '<cmd>BufferLineCyclePrev<cr>', desc = 'Prev buffer' },
@@ -11,6 +15,7 @@ return {
     },
     opts = {
         options = {
+            themeable = true,
             offsets = {
                 {
                     filetype = 'neo-tree',
@@ -19,10 +24,15 @@ return {
                     end,
                     highlight = 'Directory',
                     text_align = 'left',
-                    padding = 1,
                 },
             },
         },
+        highlights = function()
+            local rose_pine_basis = require 'rose-pine.plugins.bufferline'
+            local hi = vim.tbl_extend('force', rose_pine_basis, rose_pine_overrides)
+            -- vim.print(hi)
+            return hi
+        end,
     },
-    event = 'VeryLazy',
+    event = { 'VeryLazy', 'ColorScheme' },
 }
