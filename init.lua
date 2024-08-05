@@ -216,6 +216,7 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require 'options'
+require 'autocmds'
 
 -- [[ Configure and install plugins ]]
 --

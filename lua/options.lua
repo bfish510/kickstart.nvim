@@ -14,3 +14,12 @@ vim.opt.splitbelow = true
 vim.opt.iskeyword:append { '-' }
 
 vim.opt.termguicolors = true
+
+vim.opt.autowrite = true
+vim.opt.confirm = true
+
+-- Stolen from LazyVim
+vim.opt.laststatus = 3
+vim.opt.splitkeep = 'screen'
+vim.opt.virtualedit = 'block'
+vim.g.markdown_recommended_style = 0

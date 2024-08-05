@@ -15,6 +15,7 @@ return {
     },
     opts = {
         options = {
+            disabled_filetypes = { statusline = { 'ministarter' } },
             themeable = true,
             offsets = {
                 {
@@ -22,8 +23,14 @@ return {
                     text = function()
                         return vim.fn.getcwd()
                     end,
-                    highlight = 'Directory',
+                    highlight = 'PanelHeading',
                     text_align = 'left',
+                    separator = true,
+                },
+                {
+                    filetype = 'neotest-summary',
+                    text = 'Test Summary',
+                    highlight = 'PanelHeading',
                 },
             },
         },
@@ -35,4 +42,16 @@ return {
         end,
     },
     event = { 'VeryLazy', 'ColorScheme' },
+    extensions = { 'neo-tree', 'lazy' },
+    config = function(_, opts)
+        require('bufferline').setup(opts)
+        -- Fix bufferline when restoring a session
+        vim.api.nvim_create_autocmd({ 'BufAdd', 'BufDelete' }, {
+            callback = function()
+                vim.schedule(function()
+                    pcall(nvim_bufferline)
+                end)
+            end,
+        })
+    end,
 }

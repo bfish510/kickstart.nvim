@@ -13,14 +13,15 @@ return {
         theme = 'rose-pine',
         icons_enabled = true,
         disabled_filetypes = {
-            statusline = { 'neo-tree', 'toggleterm' },
+            statusline = { 'neo-tree', 'toggleterm', 'neotest-summary', 'edgy' },
             winbar = {},
         },
         ignore_focus = {
             'neo-tree',
             'toggleterm',
             'aerial',
+            'neotest-summary',
         },
-        extensions = { 'neo-tree', 'lazy', 'fzf', 'trouble' },
+        extensions = { 'lazy', 'fzf', 'trouble' },
     },
 }
