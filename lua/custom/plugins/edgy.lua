@@ -58,7 +58,9 @@ return {
                     end,
                     pinned = true,
                     collapsed = false,
-                    open = 'Neotree position=left source=filesystem',
+                    open = function()
+                        require('neo-tree.command').execute { source = 'filesystem', toggle = true, action = 'focus', position = 'left' }
+                    end,
                 },
                 {
                     title = 'Neo-Tree Git',

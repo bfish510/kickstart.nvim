@@ -13,7 +13,14 @@ return {
     cmd = 'Neotree',
     ---@type LazyKeysSpec[]
     keys = {
-        { '\\', ':Neotree reveal source=filesystem position=left<CR>', desc = 'NeoTree reveal', silent = true },
+        {
+            '\\',
+            function()
+                require('neo-tree.command').execute { source = 'filesystem', toggle = true, action = 'focus' }
+            end,
+            desc = '[G]it [S]tatus preview',
+            silent = false,
+        },
         {
             '<leader>gs',
             function()
