@@ -48,6 +48,7 @@ return {
                 },
                 { ft = 'spectre_panel', size = { height = 0.4 } },
                 { title = 'Neotest Output', ft = 'neotest-output-panel', size = { height = 15 } },
+                { ft = 'terminal', size = { height = 0.4 } },
             },
             left = {
                 {
